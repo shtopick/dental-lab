@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}Врачи - Dental Lab{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-user-md"></i> Врачи</h2>
+    <a href="{% url 'admin:chat_doctor_add' %}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Добавить врача
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if doctors %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ФИО</th>
+                            <th>Клиника</th>
+                            <th>Телефон</th>
+                            <th>Email</th>
+                            <th>Дата добавления</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for doctor in doctors %}
+                        <tr>
+                            <td>
+                                <strong>{{ doctor.full_name }}</strong>
+                                {% if doctor.specialization %}
+                                    <br><small class="text-muted">{{ doctor.specialization }}</small>
+                                {% endif %}
+                            </td>
+                            <td>{{ doctor.clinic_name }}</td>
+                            <td>
+                                <a href="tel:{{ doctor.phone }}">
+                                    <i class="fas fa-phone"></i> {{ doctor.phone }}
+                                </a>
+                            </td>
+                            <td>
+                                {% if doctor.email %}
+                                    <a href="mailto:{{ doctor.email }}">
+                                        <i class="fas fa-envelope"></i> {{ doctor.email }}
+                                    </a>
+                                {% else %}
+                                    <span class="text-muted">—</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ doctor.created_at|date:"d.m.Y" }}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="{% url 'admin:chat_doctor_change' doctor.id %}" 
+                                       class="btn btn-sm btn-outline-primary" title="Редактировать">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-info" title="Чат с врачом">
+                                        <i class="fas fa-comment"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            {% if is_paginated %}
+            <nav aria-label="Навигация по страницам">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Назад</a>
+                        </li>
+                    {% endif %}
+                    
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Вперед</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-user-md fa-3x text-muted mb-3"></i>
+                <h4>Врачи не добавлены</h4>
+                <p class="text-muted">Добавьте первого врача, чтобы начать работу</p>
+                <a href="{% url 'admin:chat_doctor_add' %}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Добавить первого врача
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

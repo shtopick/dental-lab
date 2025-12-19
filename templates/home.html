@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - Dental Lab{% endblock %}
+
+{% block content %}
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="card border-0 bg-primary text-white">
+            <div class="card-body p-5">
+                <h1 class="display-4"><i class="fas fa-tooth"></i> Dental Lab</h1>
+                <p class="lead">Профессиональная система управления коммуникациями с врачами и учета работ</p>
+                <p>Решает проблему ухода специалистов с сохранением всей истории работ, согласований и переписки</p>
+                
+                <div class="mt-4">
+                    <a href="{% url 'doctor_list' %}" class="btn btn-light btn-lg me-2">
+                        <i class="fas fa-user-md"></i> Перейти к врачам
+                    </a>
+                    <a href="{% url 'admin:index' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-cog"></i> Панель администратора
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card stat-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3><i class="fas fa-user-md text-primary fa-2x"></i></h3>
+                        <h5 class="card-title">Врачи</h5>
+                        <p class="card-text">Управляйте базой врачей-стоматологов и их клиниками</p>
+                    </div>
+                    <span class="badge bg-primary rounded-pill" style="font-size: 1.5rem;">{{ doctor_count }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card stat-card h-100" style="border-left-color: #198754;">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3><i class="fas fa-comments text-success fa-2x"></i></h3>
+                        <h5 class="card-title">История чатов</h5>
+                        <p class="card-text">Вся переписка сохраняется и доступна всем специалистам</p>
+                    </div>
+                    <span class="badge bg-success rounded-pill" style="font-size: 1.5rem;">∞</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card stat-card h-100" style="border-left-color: #6f42c1;">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3><i class="fas fa-shield-alt text-purple fa-2x"></i></h3>
+                        <h5 class="card-title">Безопасность данных</h5>
+                        <p class="card-text">Никаких потерь информации при уходе сотрудников</p>
+                    </div>
+                    <span class="badge bg-purple rounded-pill" style="font-size: 1.5rem;"><i class="fas fa-lock"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-white">
+                <h4><i class="fas fa-bullseye"></i> Решаемые проблемы</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-check text-success me-2"></i> Сохранение истории переписки
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-check text-success me-2"></i> Централизованное хранение фото работ
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-check text-success me-2"></i> Доступ к данным всех специалистов
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-check text-success me-2"></i> Контроль сроков и дедлайнов
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-check text-success me-2"></i> Учет согласований с врачами
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-check text-success me-2"></i> Аналитика и отчетность
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
